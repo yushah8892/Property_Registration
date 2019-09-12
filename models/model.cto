@@ -1,0 +1,54 @@
+/**
+* Supply Chain Network : Model File
+*/
+
+namespace org.upgrad.network
+
+asset Property identified by propertyId {
+  o String propertyId
+  o Integer marketPrice
+  o DateTime registrationDate
+  o String propertyType
+  o String location
+  o String status default="Registered"
+  --> User owner
+}
+asset PropertyListing identified by propertyListingId {
+  o String propertyListingId
+  --> Property property
+}
+ 
+/************** PARTICIPANTS ******************/
+
+participant User identified by userId {
+  o String userId
+  o String userName
+  o String email
+  o Integer identificationNumber
+  o String bankName
+  o String bankAddress
+  o Integer accountNumber
+  o String IFSCCode
+  o Integer balance
+}
+
+
+
+/************** TRANSACTIONS ******************/
+
+transaction CreateProperty {
+  o String propertyId
+  o Integer marketPrice
+  o DateTime registrationDate
+  o String propertyType
+  o String location
+
+}
+  
+transaction IntentForSale {
+  --> Property property
+}
+  transaction PurchaseProperty {
+  --> PropertyListing propertyListing
+}
+
